@@ -18,11 +18,20 @@ function DateNtime() {
       };
     
       return (
-        <div>
+        <div className={styles.container}>
+          <div>
           <DateRangePicker
             ranges={selectedRange}
             onChange={handleSelect}
+            months={2}
+            direction="horizontal"
           />
+          <br />
+          <div className={styles.btns}>
+          <button className={styles.btn} >lable</button>
+          <button className={styles.btn_primary} >lable</button>
+          </div>
+          </div>
         </div>
       );
     };

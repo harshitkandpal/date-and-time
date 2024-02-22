@@ -1,0 +1,33 @@
+.container{
+    background-color: white;
+    border-radius: 12px;
+    margin: 60px 80px;
+    padding: 16px 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.btns{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btn{
+    margin: 10px;
+    padding: 9px 15px;
+    background-color: white;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 4px;
+}
+
+.btn_primary{
+    margin: 10px;
+    padding: 9px 15px;
+    color: white;
+    background-color: rgb(61, 145, 255);
+    border-width: 1px;
+    border-radius: 4px;
+    border-color: rgb(61, 145, 255);
+}

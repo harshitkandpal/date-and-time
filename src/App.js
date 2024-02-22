@@ -1,10 +1,10 @@
-import MainContainer from "./components/DateNtime/MainContainer";
+import DateNtime from "./components/DateNtime/DateNtime";
 
 
 function App() {
   return (
     <div >
-      <MainContainer/>
+      <DateNtime/>
     </div>
   );
 }
