@@ -1,4 +1,7 @@
-
+.hide {
+    display: none;
+  }
+  
 .container{
     background-color: white;
     border-radius: 12px;

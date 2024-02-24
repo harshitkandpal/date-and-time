@@ -5,6 +5,8 @@ import 'react-date-range/dist/theme/default.css';
 import styles from './DateNtime.module.css';
 
 function DateNtime({
+  mode,
+  hideBtn,
   initialStartDate,
   initialEndDate,
   onDateChange,
@@ -39,6 +41,68 @@ function DateNtime({
   dateDisplayFormat,
   inputRangesText,
 }) {
+
+  const modeConfigurations={
+    Default:{
+      months: 2,
+      direction: "horizontal",
+    },
+  
+    withOutShowDateDisplay: {
+      months: 2,
+      direction: "horizontal",
+      showDateDisplay:false,
+    },
+  
+    withOutSidebar: {
+      months: 2,
+      direction: "horizontal",
+      staticRanges: [],
+    },
+  
+    withOutSidebarAndDateDisplay: {
+      months: 2,
+      direction: "horizontal",
+      staticRanges: [],
+      showDateDisplay:false,
+    },
+  
+    singleMode: {
+      months: 1,
+      direction: "horizontal",
+    },
+  
+    singleModeWithOutDateDisplay: {
+      months: 1,
+      direction: "horizontal",
+      showDateDisplay:false,
+    },
+  
+    singleModeWithOutSidebar: {
+      months: 1,
+      direction: "horizontal",
+      staticRanges: [],
+    },
+  
+    singleModeWithOutSidebarAndDateDisplay: { 
+      months: 1,
+      direction: "horizontal",
+      staticRanges: [],
+      showDateDisplay:false,
+    },
+  
+    singleModeWithOutSidebarAndDateDisplayBtn: {
+      months: 1,
+      direction: "horizontal",
+      staticRanges: [],
+      showDateDisplay:false,
+      hideBtn: true,
+    },
+  }
+
+  const selectedModeConfig = modeConfigurations[mode] || modeConfigurations.Default;
+
+
   const [selectedRange, setSelectedRange] = useState([
     {
       startDate: initialStartDate || new Date(),
@@ -52,44 +116,45 @@ function DateNtime({
     onDateChange && onDateChange(ranges.selection);
   };
 
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ padding: '16px', margin: '0', boxSizing: 'border-box'}}>
       <div>
-        <DateRangePicker
-          ranges={ranges || selectedRange}
-          onChange={handleSelect}
-          months={months || 2}
-          direction={direction || 'horizontal'}
-          showSelectionPreview={showSelectionPreview}
-          moveRangeOnFirstSelection={moveRangeOnFirstSelection}
-          editableDateInputs={editableDateInputs}
-          dragSelectionEnabled={dragSelectionEnabled}
-          renderStaticRangeLabel={renderStaticRangeLabel}
-          staticRanges={staticRanges}
-          inputRanges={inputRanges}
-          locale={locale}
-          calendars={calendars}
-          maxDate={maxDate}
-          minDate={minDate}
-          disabledDates={disabledDates}
-          rangeColors={rangeColors}
-          showMonthAndYearPickers={showMonthAndYearPickers}
-          showDateDisplay={showDateDisplay}
-          showMonthArrow={showMonthArrow}
-          showYearArrow={showYearArrow}
-          navigate={navigate}
-          scroll={scroll}
-          className={className}
-          weekdayDisplayFormat={weekdayDisplayFormat}
-          dayDisplayFormat={dayDisplayFormat}
-          monthDisplayFormat={monthDisplayFormat}
-          dateDisplayFormat={dateDisplayFormat}
-          inputRangesText={inputRangesText}
-        />
+      <DateRangePicker
+        onChange={handleSelect}
+        months={selectedModeConfig.months || 2}
+        direction={selectedModeConfig.direction || 'horizontal'}
+        showDateDisplay={selectedModeConfig.showDateDisplay !== undefined ? selectedModeConfig.showDateDisplay : true}
+        ranges={ranges || selectedRange}
+        showSelectionPreview={selectedModeConfig.showSelectionPreview}
+        moveRangeOnFirstSelection={selectedModeConfig.moveRangeOnFirstSelection}
+        editableDateInputs={selectedModeConfig.editableDateInputs}
+        dragSelectionEnabled={selectedModeConfig.dragSelectionEnabled}
+        renderStaticRangeLabel={selectedModeConfig.renderStaticRangeLabel}
+        staticRanges={selectedModeConfig.staticRanges}
+        inputRanges={selectedModeConfig.inputRanges||[]}
+        locale={selectedModeConfig.locale}
+        calendars={selectedModeConfig.calendars}
+        maxDate={selectedModeConfig.maxDate}
+        minDate={selectedModeConfig.minDate}
+        disabledDates={selectedModeConfig.disabledDates}
+        rangeColors={selectedModeConfig.rangeColors}
+        showMonthAndYearPickers={selectedModeConfig.showMonthAndYearPickers}
+        showMonthArrow={selectedModeConfig.showMonthArrow}
+        showYearArrow={selectedModeConfig.showYearArrow}
+        navigate={selectedModeConfig.navigate}
+        scroll={selectedModeConfig.scroll}
+        className={selectedModeConfig.className}
+        weekdayDisplayFormat={selectedModeConfig.weekdayDisplayFormat}
+        dayDisplayFormat={selectedModeConfig.dayDisplayFormat}
+        monthDisplayFormat={selectedModeConfig.monthDisplayFormat}
+        dateDisplayFormat={selectedModeConfig.dateDisplayFormat}
+        inputRangesText={selectedModeConfig.inputRangesText}
+      />
         <br />
         <div className={styles.btns}>
-          <button className={styles.btn}>{secBtn || "secBtn"}</button>
-          <button className={styles.btn_primary}>{primeBtn || "primeBtn"}</button>
+          <button className={`${styles.btn_primary} ${selectedModeConfig.hideBtn ? styles.hide : ''}`}>{primeBtn || "primeBtn"}</button>
+          <button className={`${styles.btn} ${selectedModeConfig.hideBtn ? styles.hide : ''}`}>{secBtn || "secBtn"}</button>
         </div>
       </div>
     </div>

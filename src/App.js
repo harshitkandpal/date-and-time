@@ -1,7 +1,6 @@
 import DateNtime from "./components/DateNtime/DateNtime";
 import { useState } from "react";
 
-
 function App() {
   const [selectedStartDate, setSelectedStartDate] = useState(new Date());
   const [selectedEndDate, setSelectedEndDate] = useState(new Date());
@@ -10,16 +9,28 @@ function App() {
     setSelectedStartDate(selection.startDate);
     setSelectedEndDate(selection.endDate);
   };
+
+  /*Modes 
+    Default
+    withOutShowDateDisplay
+    withOutSidebar
+    withOutSidebarAndDateDisplay
+    singleMode
+    singleModeWithOutDateDisplay
+    singleModeWithOutSidebar
+    singleModeWithOutSidebarAndDateDisplay
+    singleModeWithOutSidebarAndDateDisplayBtn
+  */
+
   return (
-    <div >
-      <DateNtime
-        initialStartDate={selectedStartDate}
-        initialEndDate={selectedEndDate}
-        onDateChange={handleDateChange}
-        months={2}
-        direction="horizontal"
-        secBtn="Lable"
-        primeBtn="Lable"
+    <div>
+      <DateNtime 
+      mode="Default"
+      secBtn= "Label"
+      primeBtn= "Label"
+      initialStartDate= {selectedStartDate}
+      initialEndDate= {selectedEndDate}
+      onDateChange= {handleDateChange}
       />
     </div>
   );
